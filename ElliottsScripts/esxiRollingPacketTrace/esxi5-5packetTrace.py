@@ -10,10 +10,10 @@ Email: elliott.ecton@netapp.com
 import os
 import time
 
-NetAppIP = "10.112.77.167"  # This is the NFS LIF IP to filter on
-vmknic = ["vmk0"]  # Add more vmknics if needed. Format is ["vmk0","vmk1",etc...]
+NetAppIP = "33.30.8.10"  # This is the NFS LIF IP to filter on
+vmknic = ["vmk1"]  # Add more vmknics if needed. Format is ["vmk0","vmk1",etc...]
 snaplen = "500"  # May need increased for NFSv4
-filePath = "/vmfs/volumes/nfs_datastore/"  # Must include the trailing slash
+filePath = "/vmfs/volumes/291b447a-fb27fbcf-40a4-77a0bee25577/"  # Must include the trailing slash
 outFile = "esxi_trace.trc"  # Suggest you don't change
 sleepSeconds = 120  # How long each trace should run in seconds before stopping and starting new ones
 filesToKeep = 30  # NOTE: The actual number of files kept will this value x 2 x number of vmknics in variable above
