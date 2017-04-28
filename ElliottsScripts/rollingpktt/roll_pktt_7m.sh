@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
 user="root"
 hostname="gwl-nas4"
@@ -21,12 +21,8 @@ trap ctrl_c INT
 function ctrl_c() {
     echo "Stopping Traces"
     ssh $user@$hostname "pktt stop all" > /dev/null
-    nodei=1
-    while [ $nodei -le $nodes ]; do
-        mkdir -p $path/lastCapture
-        mv $path/*.trc $path/lastCapture/
-        ((nodei++))
-    done;
+    mkdir -p $path/lastCapture
+    mv $path/*.trc $path/lastCapture/
     exit
 }
 
