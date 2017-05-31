@@ -1,0 +1,31 @@
+rolling sktrace in cDOT
+
+SAVEPATH=/blah/blah
+^^^^  THis is the volume thats mounted on the node to capture the traces
+/clus/<vserver>/<unix_volume>/dir 
+
+
+
+1.  create the directory
+savepath2=$savepath/skt_roll
+
+2.  save the current sktlogd and clear it to mroot
+
+3.  set the sktracepoints
+
+4.  Roll the files based on iteration and time
+	
+	for i = 1 to iteration
+	   sleep time
+	   cp sktlog to /etc/crash/sktlog_$i
+	   cat /dev/null >sktlogd.log
+	   
+	   tarfile=`find $SAVEPATH/ -name sktlogd_$(date +F_%H)*` 
+	   
+	   if tarfile is empty, then 
+			sudo tar cfz /SAVEPATH/sktlogd_$(date +%F_%H%M%S).tgz  /mroot/etc/log/mlog/sktlogd* >/dev/null 2>&1
+		else
+			sudo tar rf /SAVEPATH/sktlogd_$(date +%F_%H%M%S).tgz  /mroot/etc/log/mlog/sktlogd* >/dev/null 2>&1
+			
+		delete sktlog file in etc crash
+  
