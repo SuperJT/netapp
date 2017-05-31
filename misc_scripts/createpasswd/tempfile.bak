@@ -1,0 +1,161 @@
+Pattern: 200
+Replacement: POST\\giancolaro
+--
+Pattern: 2926
+Replacement: POST\\giancolaro
+--
+Pattern: 2909
+Replacement: POST\\s-esbapp
+--
+Pattern: 309
+Replacement: PFIN\\s-bea
+--
+Pattern: 3368
+Replacement: POST\\s-lisa
+--
+Pattern: 350
+Replacement: POST\\s-orsadmin
+--
+Pattern: 2843
+Replacement: PFIN\\s-cisinstall
+--
+Pattern: 2850
+Replacement: PFIN\\s-cissrv
+--
+Pattern: 2859
+Replacement: PFIN\\s-cisadmin
+--
+Pattern: 3971
+Replacement: POST\\s-bap
+--
+Pattern: 3044
+Replacement: POST\\s-bmc
+--
+Pattern: 2849
+Replacement: PFIN\\s-cislsfuser
+--
+Pattern: 2667
+Replacement: POST\\s-mwhttpd
+--
+Pattern: 2848
+Replacement: PFIN\\s-cislsfadmi
+--
+Pattern: 3265
+Replacement: POST\\s-tcssup
+--
+Pattern: 2928
+Replacement: POST\\s-bancsapp
+--
+Pattern: 3562
+Replacement: POST\\s-bomcapp
+--
+Pattern: 2962
+Replacement: POST\\s-bancstcs
+--
+Pattern: 307
+Replacement: POST\\s-egate
+--
+Pattern: 600
+Replacement: POST\\s-clearcase-albd
+--
+Pattern: 3061
+Replacement: POST\\s-esrv
+--
+Pattern: 1237
+Replacement: POST\\s-egwtest
+--
+Pattern: 1069
+Replacement: POST\\s-egwbuild
+--
+Pattern: 3198
+Replacement: POST\\s-nginx
+--
+Pattern: 3792
+Replacement: POST\\s-dcbuild
+--
+Pattern: 2739
+Replacement: POST\\s-csbuild
+--
+Pattern: 3106
+Replacement: POST\\s-csclient
+--
+Pattern: 2929
+Replacement: POST\\s-jenkins-pf
+--
+Pattern: 3622
+Replacement: POST\\s-eai2docs
+--
+Pattern: 2959
+Replacement: PFIN\\s-eai2cis
+--
+Pattern: 1442
+Replacement: POST\\s-beda001
+--
+Pattern: 1429
+Replacement: POST\\s-beda101
+--
+Pattern: 2533
+Replacement: POST\\s-jos
+--
+Pattern: 3525
+Replacement: POST\\s-docs
+--
+Pattern: 3563
+Replacement: POST\\s-unsdat
+--
+Pattern: 2335
+Replacement: POST\\s-dmappl
+--
+Pattern: 2627
+Replacement: PFIN\\s-splunkp
+--
+Pattern: 1443
+Replacement: POST\\s-linux-apzv
+--
+Pattern: 2375
+Replacement: POST\\s-linux-ezf
+--
+Pattern: 1348
+Replacement: POST\\s-linux-napf
+--
+Pattern: 2770
+Replacement: POST\\s-linux-jura
+--
+Pattern: 2772
+Replacement: POST\\s-linux-cmod
+--
+Pattern: 2771
+Replacement: POST\\s-linux-tsm
+--
+Pattern: 3254
+Replacement: POST\\s-linux-dab
+--
+Pattern: 2583
+Replacement: PFIN\\s-eviadmin
+--
+Pattern: 1154
+Replacement: POST\\s-epla
+--
+Pattern: 318
+Replacement: POST\\s-kobeapp
+--
+Pattern: 300
+Replacement: POST\\s-sybase
+--
+Pattern: 3783
+Replacement: POST\\s-pedastmigd
+--
+Pattern: 3784
+Replacement: POST\\s-pedastmigt
+--
+Pattern: 4059
+Replacement: POST\\s-isynth
+--
+Pattern: 3602
+Replacement: POST\\s-bamboo
+--
+Pattern: 4511
+Replacement: post\\s-isymv
+--
+Pattern: 4510
+Replacement: post\\s-isystd
