@@ -23,6 +23,7 @@ while true; do
 			echo "issue seen"
 			#fix issue
 			sudo ngsh -c "set d -c off;nblade credentials flush -vserver $vserver -node $node -unix-user-id 65534"
+			i=0
 		fi
 	fi
 	sleep 5
