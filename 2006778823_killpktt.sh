@@ -17,5 +17,6 @@ while read line ; do
 		sleep 10
 		sudo ngsh -n "pktt stop all"
 		sudo ngsh -c "autosupport invoke -node * -type all -message STALE_STATEID_CAUGHT"
+		break
 	fi
 done
