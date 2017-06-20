@@ -1,9 +1,0 @@
-#!/bin/bash
-
-i=0
-
-while [ $i=0 ]; do
-	ssh admin@10.114.2.30 "date"
-        ssh admin@10.114.2.30 "set d -c off; debug csm counters show" | grep -v "0"
-	sleep 10
-done
