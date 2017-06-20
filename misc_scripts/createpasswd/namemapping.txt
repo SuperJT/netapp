@@ -1,0 +1,124 @@
+2       -                 -                   Pattern: ^root$
+                                          Replacement: POST\\s-nadef
+3       -                 -                   Pattern: 200
+                                          Replacement: POST\\giancolaro
+4       -                 -                   Pattern: 2926
+                                          Replacement: POST\\giancolaro
+5       -                 -                   Pattern: 2909
+                                          Replacement: POST\\s-esbapp
+6       -                 -                   Pattern: 309
+                                          Replacement: PFIN\\s-bea
+7       -                 -                   Pattern: 3368
+                                          Replacement: POST\\s-lisa
+8       -                 -                   Pattern: 350
+                                          Replacement: POST\\s-orsadmin
+10      -                 -                   Pattern: 2843
+                                          Replacement: PFIN\\s-cisinstall
+11      -                 -                   Pattern: 2850
+                                          Replacement: PFIN\\s-cissrv
+12      -                 -                   Pattern: 2859
+                                          Replacement: PFIN\\s-cisadmin
+13      -                 -                   Pattern: 3971
+                                          Replacement: POST\\s-bap
+14      -                 -                   Pattern: 3044
+                                          Replacement: POST\\s-bmc
+17      -                 -                   Pattern: 2849
+                                          Replacement: PFIN\\s-cislsfuser
+18      -                 -                   Pattern: 2667
+                                          Replacement: POST\\s-mwhttpd
+19      -                 -                   Pattern: 2848
+                                          Replacement: PFIN\\s-cislsfadmi
+20      -                 -                   Pattern: 3265
+                                          Replacement: POST\\s-tcssup
+21      -                 -                   Pattern: 2928
+                                          Replacement: POST\\s-bancsapp
+22      -                 -                   Pattern: bancsapp
+                                          Replacement: POST\\s-bancsapp
+23      -                 -                   Pattern: 3562
+                                          Replacement: POST\\s-bomcapp
+24      -                 -                   Pattern: 2962
+                                          Replacement: POST\\s-bancstcs
+25      -                 -                   Pattern: 307
+                                          Replacement: POST\\s-egate
+26      -                 -                   Pattern: 600
+                                          Replacement: POST\\s-clearcase-albd
+27      -                 -                   Pattern: 3061
+                                          Replacement: POST\\s-esrv
+28      -                 -                   Pattern: 1237
+                                          Replacement: POST\\s-egwtest
+29      -                 -                   Pattern: egwtest
+                                          Replacement: POST\\s-egwtest
+30      -                 -                   Pattern: 1069
+                                          Replacement: POST\\s-egwbuild
+31      -                 -                   Pattern: egwbuild
+                                          Replacement: POST\\s-egwbuild
+32      -                 -                   Pattern: 3198
+                                          Replacement: POST\\s-nginx
+34      -                 -                   Pattern: 3792
+                                          Replacement: POST\\s-dcbuild
+35      -                 -                   Pattern: 2739
+                                          Replacement: POST\\s-csbuild
+36      -                 -                   Pattern: csbuild
+                                          Replacement: POST\\s-csbuild
+37      -                 -                   Pattern: 3106
+                                          Replacement: POST\\s-csclient
+39      -                 -                   Pattern: 2929
+                                          Replacement: POST\\s-jenkins-pf
+41      -                 -                   Pattern: 3622
+                                          Replacement: POST\\s-eai2docs
+43      -                 -                   Pattern: 2959
+                                          Replacement: PFIN\\s-eai2cis
+44      -                 -                   Pattern: 1442
+                                          Replacement: POST\\s-beda001
+45      -                 -                   Pattern: 1429
+                                          Replacement: POST\\s-beda101
+46      -                 -                   Pattern: 2533
+                                          Replacement: POST\\s-jos
+47      -                 -                   Pattern: 3525
+                                          Replacement: POST\\s-docs
+48      -                 -                   Pattern: 3563
+                                          Replacement: POST\\s-unsdat
+49      -                 -                   Pattern: 2335
+                                          Replacement: POST\\s-dmappl
+50      -                 -                   Pattern: 2627
+                                          Replacement: PFIN\\s-splunkp
+51      -                 -                   Pattern: 1443
+                                          Replacement: POST\\s-linux-apzv
+52      -                 -                   Pattern: 2375
+                                          Replacement: POST\\s-linux-ezf
+53      -                 -                   Pattern: 1348
+                                          Replacement: POST\\s-linux-napf
+54      -                 -                   Pattern: 2770
+                                          Replacement: POST\\s-linux-jura
+55      -                 -                   Pattern: 2772
+                                          Replacement: POST\\s-linux-cmod
+56      -                 -                   Pattern: 2771
+                                          Replacement: POST\\s-linux-tsm
+57      -                 -                   Pattern: 3254
+                                          Replacement: POST\\s-linux-dab
+58      -                 -                   Pattern: 2583
+                                          Replacement: PFIN\\s-eviadmin
+59      -                 -                   Pattern: 1154
+                                          Replacement: POST\\s-epla
+60      -                 -                   Pattern: 318
+                                          Replacement: POST\\s-kobeapp
+61      -                 -                   Pattern: 300
+                                          Replacement: POST\\s-sybase
+62      -                 -                   Pattern: 3783
+                                          Replacement: POST\\s-pedastmigd
+63      -                 -                   Pattern: 3784
+                                          Replacement: POST\\s-pedastmigt
+64      -                 -                   Pattern: 4059
+                                          Replacement: POST\\s-isynth
+65      -                 -                   Pattern: isynth
+                                          Replacement: POST\\s-isynth
+67      -                 -                   Pattern: 3602
+                                          Replacement: POST\\s-bamboo
+68      -                 -                   Pattern: 4511
+                                          Replacement: post\\s-isymv
+69      -                 -                   Pattern: isymv
+                                          Replacement: post\\s-isymv
+70      -                 -                   Pattern: 4510
+                                          Replacement: post\\s-isystd
+71      -                 -                   Pattern: (.+)
+                                          Replacement: POST\\\1
