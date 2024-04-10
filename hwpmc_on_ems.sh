@@ -17,7 +17,6 @@
 # curl -k0 https://raw.githubusercontent.com/SuperJT/netapp/master/hwpmc_on_ems.sh > hwpmc_on_ems.sh
 # aff700s-2n-rtp-2::*> event generate -node local -message-name vifmgr.bgp.vserverDown jtown Default
 # aff700s-2n-rtp-2::*> event generate -node local -message-name vifmgr.bgp.vserverUp jtown Default
-
 hwpmc_pid=0
 
 # Download the script if it does not exist
@@ -29,7 +28,7 @@ if [[ ! -f collectProfile-1.3-beta.sh ]]; then
         exit 1
     fi
 fi
-
+echo "EMS Monitoring starting.."
 tail -f /mroot/etc/log/ems | while read -r line
 do
     if [[ $line == *"vifmgr_bgp_vserverDown_1"* ]]; then
@@ -37,13 +36,7 @@ do
         ngsh -c "set d -c off;event generate -node local -message-name tape.diagMsg hwpmc starting"
         if [[ $hwpmc_pid -eq 0 ]]; then  # Only start the script if it's not already running
             bash collectProfile-1.3-beta.sh -d network &  # Start the hwpmc script in the background
-            hwpmc_pid=$!  # Save the PID of the hwpmc script
-        fi
-    elif [[ $line == *"vifmgr_bgp_vserverUp_1"* ]]; then
-        echo "vserverUp event detected, stopping hwpmc script"
-        if [[ $hwpmc_pid -ne 0 ]]; then
-            kill $hwpmc_pid  # Stop the hwpmc script
-            hwpmc_pid=0
+            break  # Exit the loop
         fi
     fi
 done
