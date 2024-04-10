@@ -14,6 +14,10 @@
 # Run with the following command
 # systemshell -node <node> -command bash long_running.sh > output.txt &
 #		Example: systemshell -node nas-cm911-01 -command bash long_running.sh > n1_output.txt &
+# curl -k0 https://raw.githubusercontent.com/SuperJT/netapp/master/hwpmc_on_ems.sh > hwpmc_on_ems.sh
+# aff700s-2n-rtp-2::*> event generate -node local -message-name vifmgr.bgp.vserverDown jtown Default
+# aff700s-2n-rtp-2::*> event generate -node local -message-name vifmgr.bgp.vserverUp jtown Default
+
 hwpmc_pid=0
 
 # Download the script if it does not exist
