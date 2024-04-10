@@ -95,6 +95,7 @@ if [ ! -f /boot/kernel/$bootfile ]; then
    # We set it back at the end...
    sysctl kern.bootfile=/kernel
 fi
+
 if [ -z "$procpid" ]; then
    sysctl debug.kgmon.profiled_ontap_domain=$domain
 
@@ -104,6 +105,10 @@ else
    pmcstat -O /mroot/etc/log/$profdir/sample.$domain.out -n 1000000 -P $clksrc -r /boot/kernel -t $procpid &
    pid=$!
 fi
+
+# Add the trap command here
+trap "kill $pid 2> /dev/null" EXIT
+
 sleep 0.2
 echo "`date`: Checking to see if pmcstat is running..."
 if ps -p $pid ; then
