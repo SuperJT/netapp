@@ -26,16 +26,16 @@ if [[ ! -f collectProfile-1.3-beta.sh ]]; then
     fi
 fi
 
-tail -f /mroot/etc/log/ems.log | while read -r line
+tail -f /mroot/etc/log/ems | while read -r line
 do
-    if [[ $line == *"vifmgr.bgp.vserverDown"* ]]; then
+    if [[ $line == *"vifmgr_bgp_vserverDown_1"* ]]; then
         echo "vserverDown event detected, starting hwpmc script"
         ngsh -c "set d -c off;event generate -node local -message-name tape.diagMsg hwpmc starting"
         if [[ $hwpmc_pid -eq 0 ]]; then  # Only start the script if it's not already running
             bash collectProfile-1.3-beta.sh -d network &  # Start the hwpmc script in the background
             hwpmc_pid=$!  # Save the PID of the hwpmc script
         fi
-    elif [[ $line == *"vifmgr.bgp.vserverUp"* ]]; then
+    elif [[ $line == *"vifmgr_bgp_vserverUp_1"* ]]; then
         echo "vserverUp event detected, stopping hwpmc script"
         if [[ $hwpmc_pid -ne 0 ]]; then
             kill $hwpmc_pid  # Stop the hwpmc script
