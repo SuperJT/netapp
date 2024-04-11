@@ -36,9 +36,9 @@ do
         ngsh -c "set d -c off;event generate -node local -message-name tape.diagMsg hwpmc-starting"
         if [[ $hwpmc_pid -eq 0 ]]; then  # Only start the script if it's not already running
             bash collectProfile-1.3-beta.sh -d network &  # Start the hwpmc script in the background
-            exit  # Exit the loop
+            echo "EMS Monitoring stopped.."
+            exit 0
         fi
     fi
 done
-echo "EMS Monitoring stopped.."
 
