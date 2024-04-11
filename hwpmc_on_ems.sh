@@ -16,9 +16,6 @@
 # aff700s-2n-rtp-2::*> event generate -node local -message-name vifmgr.bgp.vserverDown jtown Default
 # aff700s-2n-rtp-2::*> event generate -node local -message-name vifmgr.bgp.vserverUp jtown Default
 
-
-hwpmc_pid=0
-
 # Download the script if it does not exist
 if [[ ! -f collectProfile-1.3-beta.sh ]]; then
     echo "collectProfile-1.3-beta.sh does not exist. Downloading the script..."
@@ -34,11 +31,9 @@ do
     if [[ $line == *"vifmgr_bgp_vserverDown_1"* ]]; then
         echo "vserverDown event detected, starting hwpmc script"
         ngsh -c "set d -c off;event generate -node local -message-name tape.diagMsg hwpmc-starting"
-        if [[ $hwpmc_pid -eq 0 ]]; then  # Only start the script if it's not already running
-            bash collectProfile-1.3-beta.sh -d network &  # Start the hwpmc script in the background
-            echo "EMS Monitoring stopped.."
-            exit 0
-        fi
+        bash collectProfile-1.3-beta.sh -d network &  # Start the hwpmc script in the background
+        ngsh -c "set d -c off;system node autosupport invoke -node local -message hwpmc_collected"
+        echo "EMS Monitoring stopped.."
+        exit 0
     fi
 done
-
