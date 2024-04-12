@@ -33,7 +33,7 @@ do
         ngsh -c "set d -c off;event generate -node local -message-name tape.diagMsg hwpmc-starting"
         bash collectProfile-1.3-beta.sh -d network &  # Start the hwpmc script in the background
         sleep 90 # sleep 90 seconds to let hwpmc finish collecting before triggering asup
-        ngsh -c "system node autosupport invoke -node -type all local -message hwpmc_collected"
+        ngsh -c "system node autosupport invoke -node local -type all -message hwpmc_collected"
         echo "EMS Monitoring stopped.."
         exit 0
     fi
