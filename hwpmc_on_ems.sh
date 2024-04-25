@@ -13,7 +13,6 @@
 # curl -kO https://raw.githubusercontent.com/SuperJT/netapp/master/collectProfile-1.3-beta.sh
 # aff700s-2n-rtp-2::*> event generate -node local -message-name vifmgr.bgp.vserverDown jtown Default
 # aff700s-2n-rtp-2::*> event generate -node local -message-name vifmgr.bgp.vserverUp jtown Default
-
 emsMatch="vifmgr_bgp_vserverDown_1"
 
 # Download the script if it does not exist
@@ -25,6 +24,20 @@ if [[ ! -f collectProfile-1.3-beta.sh ]]; then
         exit 1
     fi
 fi
+
+# Start cgstat monitoring in the background
+echo "cgstat Monitoring starting.."
+while true; do
+    utilization=$(cgstat -s | grep -A 50 'CG ID: 0' | grep -i 'Task loop utilization (percent):' | awk '{print $NF}')
+    conns=$(jall netstat -anCET | grep EST | wc -l)
+    if (( utilization > 60 )); then
+        echo "High utilization detected, generating asups"
+        ngsh -c "set d -c off;event generate -node local -message-name tape.diagMsg cg0_utilization:$utilization:_conns:$conns"
+        ngsh -c "system node autosupport invoke -node local -type all -message cg0_utilization_$utilization:_conns:$conns"
+    fi
+    sleep 10 # check every 10 seconds
+done &
+
 echo "EMS Monitoring starting.."
 tail -F /mroot/etc/log/ems | while read -r line
 do
