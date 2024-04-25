@@ -29,11 +29,11 @@ fi
 echo "cgstat Monitoring starting.."
 while true; do
     utilization=$(cgstat -s | grep -A 50 'CG ID: 0' | grep -i 'Task loop utilization (percent):' | awk '{print $NF}')
-    conns=$(jall netstat -anCET | grep EST | wc -l)
+    conns=$(netstat -anCET | grep EST | wc -l)
     if (( utilization > 60 )); then
         echo "High utilization detected, generating asups"
-        ngsh -c "set d -c off;event generate -node local -message-name tape.diagMsg cg0_utilization:$utilization:_conns:$conns"
-        ngsh -c "system node autosupport invoke -node local -type all -message cg0_utilization_$utilization:_conns:$conns"
+        ngsh -c "set d -c off;event generate -node local -message-name tape.diagMsg 'cg0_utilization $utilization _conns $conns'"
+        ngsh -c "system node autosupport invoke -node local -type all -message 'cg0_utilization $utilization  _conns $conns"
     fi
     sleep 10 # check every 10 seconds
 done &
