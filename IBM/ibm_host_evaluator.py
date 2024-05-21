@@ -78,7 +78,7 @@ if len(sys.argv) == 1:
                 print("Node: {}, Port: {}, Queue: {}, Data LIF IP: {}".format(
                     node, port, queue_label, data_lif_ip))
                 # Invoke the connectivity test script with the data LIF IP and TCP port 111
-                subprocess.run(["python3", "IBM_queue_connect_spam.py", "--target-ip", data_lif_ip])
+                subprocess.run(["python3", "IBM_queue_test.py", "--target-ip", data_lif_ip])
 
 
 
