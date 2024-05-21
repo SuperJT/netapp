@@ -5,16 +5,47 @@ from datetime import datetime
 import time
 
 relative_url = "/api/cluster/counter/tables/nic_common/rows"
-auth = ('admin', 'P@ssw0rd')  # replace with your actual username and password
+
+def get_all_lifs(mgmt_ip, auth):
+    url = f'https://{mgmt_ip}/api/network/ip/interfaces?fields=*'
+    response = requests.get(url, auth=auth, verify=False)
+    if response.status_code == 200:
+        return response.json()['records']
+    return []
 
 # Read the list of IPs from the text file
 with open('monitored_hosts.txt', 'r') as file:
     hosts = file.read().split(',')
 
+# Assuming the first entry is the management IP for initial discovery
+mgmt_ip = hosts[0].strip()
+auth = ('admin', 'P@ssw0rd')  # replace with your actual username and password
+lifs = get_all_lifs(mgmt_ip, auth)
+
+# Process the LIFs and build a DataFrame
+lif_data = []
+for lif in lifs:
+    # Check if the interface provides NFS data services
+    if 'data_nfs' in lif['services']:
+        lif_data.append({
+            'Node': lif['location']['node']['name'],
+            'Port': lif['location']['port']['name'],
+            'LIF': lif['name'],
+            'Management IP': mgmt_ip,
+            'IP Address': lif['ip']['address']
+        })
+
+
+
+
+df_lifs = pd.DataFrame(lif_data)
+df_lifs.to_csv('lif_details.csv', index=False)
+
+# Main monitoring loop
 while True:
     # Iterate over each host
     for base_url in hosts:
-        base_url = 'https://' + base_url.strip()  # strip() is used to remove leading/trailing whitespace
+        base_url = 'https://' + base_url.strip()
         url = base_url + relative_url
         response = requests.get(url, auth=auth, verify=False)
 
@@ -23,6 +54,9 @@ while True:
 
         # Create an empty list to store all the dataframes
         dfs = []
+
+        # ... (rest of your existing code to process counters and save to CSV
+
 
         # Iterate over each record
         for record in data['records']:
