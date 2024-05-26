@@ -35,8 +35,7 @@ while attempts < 128 and len(random_ports) > 0:
         fail += 1
     except OSError as e:
         if e.errno == 98:  # Address already in use
-            print(f"OSError: Port {local_port} is already in use. Retrying with a different port.")
-            # No need to increment fail here as we are retrying
+            print(f"OSError: Port {local_port} is already in use. Skipping.")
         else:
             print(f"OSError: An operating system error occurred while trying to connect to {target_ip} on port {target_port} from source port {local_port}: {e}")
             fail += 1
