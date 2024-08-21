@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/bash
 # ------------------------------------------------------------------
-# [Author: Jason Townsend] 
-#		   Monitor ems.log for ipfw.ReachedMaxStates lines.  
+# [Author: Jason Townsend]
+#		   Monitor ems.log for ipfw.ReachedMaxStates lines.
 #          Once this finds the event, trigger cleanup to tar files,
 #          generate an EMS event, and invoke AutoSupport.
 # ------------------------------------------------------------------
@@ -26,12 +26,14 @@ generate_ipfw_output() {
 count_and_sort_ip_pairs() {
     local file="$1"
     awk '
-    {
-        # Extract the IP pairs from the log lines
-        if (match($0, /([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+) [0-9]+ <-> ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/, arr)) {
-            ip_pair = arr[1] " <-> " arr[2]
-            ip_count[ip_pair]++
-        }
+    /STATE/ {
+        # Split the line into fields
+        split($0, fields, " ")
+        # Extract the IP addresses
+        ip1 = fields[4]
+        ip2 = fields[7]
+        ip_pair = ip1 " <-> " ip2
+        ip_count[ip_pair]++
     }
     END {
         # Print the count of each IP pair
@@ -39,7 +41,7 @@ count_and_sort_ip_pairs() {
             print ip_count[ip], ip
         }
     }
-    ' "$file" | sort -nr | tee -a "$file"
+    ' "$file" | sort -nr >> "$file"
 }
 
 # Function to clean up generated files by tarring them
@@ -48,21 +50,22 @@ cleanup() {
     tar_file="/mroot/etc/log/mlog/ipfw_dyn_list_$(date +"%Y%m%d-%H%M%S").tar.gz"
     recent_files=$(find "$output_dir" -type f -name "ipfw_dyn_list_*.txt" -mmin -10)
     if [ -n "$recent_files" ]; then
-        tar -czf "$tar_file" $recent_files
+        tar -czf "$tar_file" $recent_files && rm -f $recent_files
         echo "Files tarred to $tar_file"
     else
         echo "No recent files to tar."
+	exit 0
     fi
 }
 
 # Function to trigger EMS event and generate AutoSupport
-trigger_asup() 
-    echo "Triggering ASUP for diagnosis"
+trigger_ems_and_asup() {
+    echo "High utilization detected, generating ASUP"
     ngsh -c "system node autosupport invoke -node local -type all -message IPFW_MAXSTATES_SCRIPT"
 }
 
 # Trap termination signals (SIGINT, SIGTERM) to perform cleanup
-trap cleanup SIGINT SIGTERM
+trap 'cleanup; kill 0' SIGINT SIGTERM
 
 # Start IPFW monitoring in the background
 echo "IPFW Monitoring starting.."
@@ -70,16 +73,16 @@ while true; do
     generate_ipfw_output
     sleep 120  # Sleep for 2 minutes
 done &
+ipfw_pid=$!
 
 # Start EMS monitoring
 echo "EMS Monitoring starting.."
-tail -F "$ems_log" | while read -r line
+tail -F "$ems_log" | grep --line-buffered "$emsMatch" | while read -r line
 do
-    if [[ $line == *$emsMatch* ]]; then
-        echo "ipfw.ReachedMaxStates event detected, starting cleanup"
-        cleanup
-        trigger_asup
-        echo "EMS Monitoring stopped.."
-        exit 0
-    fi
+    echo "ipfw.ReachedMaxStates event detected, starting cleanup"
+    cleanup
+    trigger_ems_and_asup
+    echo "EMS Monitoring stopped.."
+    kill $ipfw_pid  # Terminate the IPFW monitoring loop
+    exit 0
 done
